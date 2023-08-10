@@ -2,7 +2,7 @@
 
 import Battlefield from '@/components/battlefield'
 import CardAdder from '@/components/cardAdder'
-import battlefield from '@/utilities/types';
+import {battlefield} from '@/utilities/types';
 import { useEffect, useState } from 'react';
 
 export default function Home() {

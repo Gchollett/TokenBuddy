@@ -1,13 +1,13 @@
 'use client'
 
-import battlefield from "@/utilities/types"
+import {battlefield} from "@/utilities/types"
 
 type Props = {
     battlefield : battlefield
 }
 
 export default function Battlefield(props:Props){
-      const imageClass = "w-1/6 h-fit p-5"
+      const imageClass = "lg:w-1/6 w-1/3 h-fit px-6 transition-transform card"
     return(
         <>
             {props.battlefield.map((card,i) => (
@@ -18,7 +18,7 @@ export default function Battlefield(props:Props){
                     }else{
                         image?.setAttribute("class",`${imageClass} rotate-90`)
                     }
-            }} className={`${imageClass} rotate-0`} src={card.image}></img>
+            }} className={`${imageClass} rotate-0`} src={card.frontImage}></img>
         ))}
         </>
     )

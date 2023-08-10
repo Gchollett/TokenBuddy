@@ -1,10 +1,10 @@
 
-type battlefield = {
-        name: string,
-        power: number,
-        toughness: number,
-        image: string,
-        number: number
-    }[]
+export type card = {
+    name: string,
+    power: number,
+    toughness: number,
+    frontImage: string,
+    number: number
+}
 
-export default battlefield
+export type battlefield = card[]

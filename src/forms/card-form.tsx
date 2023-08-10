@@ -1,4 +1,4 @@
-import battlefield from "@/utilities/types";
+import {battlefield} from "@/utilities/types";
 import { data } from "autoprefixer";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
@@ -13,14 +13,14 @@ export default function CardForm(props:Props){
         name: "Adorned Pouncer",
         power: 4,
         toughness: 4,
-        image: "https://cards.scryfall.io/normal/front/7/1/71dc8556-a658-40e1-8a93-6a62af208a28.jpg?1562639859",
+        frontImage: "https://cards.scryfall.io/border_crop/front/7/1/71dc8556-a658-40e1-8a93-6a62af208a28.jpg?1562639859",
         number: 1
       },
       {
         name: "Ajani's Pridemate",
         power: 2,
         toughness: 2,
-        image: "https://cards.scryfall.io/normal/front/b/0/b0819e8e-fb7e-43c7-a7cf-d768f43193ac.jpg?1592515934",
+        frontImage: "https://cards.scryfall.io/border_crop/front/b/0/b0819e8e-fb7e-43c7-a7cf-d768f43193ac.jpg?1592515934",
         number: 1
       }];
       function handleSubmit(e:FormEvent){
