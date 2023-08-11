@@ -34,3 +34,7 @@ body {
 .cardForm button {
   margin-left: 10px;
 }
+
+.cardNumber {
+  min-width: 10px;
+}

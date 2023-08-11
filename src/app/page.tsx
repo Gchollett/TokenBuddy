@@ -11,15 +11,20 @@ export default function Home() {
       e.preventDefault();
       e.returnValue = '';
     })
+    window.addEventListener('contextmenu',function(e) {
+      e.preventDefault();
+    })
   })
-  const bruh : battlefield = []
-  const [battlefield,setBattlefield] = useState(bruh);
+  const start : battlefield = []
+  const [battlefield,setBattlefield] = useState(start);
   return (
-    <main className="flex min-h-screen px-1 py-24">
-      <h1 className="fixed text-3xl left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">Token Buddy</h1>
-      <div className='flex flex-wrap w-full'>
+    <main className="content-center min-h-screen px-1">
+      <h1 className="absolute text-3xl left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">Token Buddy</h1>
+      <div className='absolute px-1 left-0 top-24 w-screen'>
         <CardAdder battlefield={battlefield} adder={setBattlefield}/>
-        <Battlefield battlefield={battlefield}/>
+      </div>
+      <div className='absolute px-4 left-0 top-36 flex flex-wrap w-full'>
+        <Battlefield battlefield={battlefield} updater={setBattlefield}/>
       </div>
     </main>
   )

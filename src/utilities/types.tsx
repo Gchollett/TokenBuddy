@@ -4,7 +4,8 @@ export type card = {
     power: number,
     toughness: number,
     frontImage: string,
-    number: number
+    number: number,
+    tapped: boolean
 }
 
 export type battlefield = card[]
