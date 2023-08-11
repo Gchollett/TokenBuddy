@@ -17,28 +17,21 @@ export default function Battlefield(props:Props){
                     <p id={card.number.toString()} className="ml-4 bg-gray-300 text-black rounded px-1 w-fit cardNumber">{card.number}</p>
                     <img key={i} id={card.name + i.toString()} 
                         onClick={()=> {
+                            const number = document.getElementById(card.number.toString())?.textContent
                             const image = document.getElementById(card.name + i.toString())
-                            card.tapped = !card.tapped
+                            if(Number(number) <= 1){
+                                card.tapped = !card.tapped
+                            }else{
+                                card.number -= 1;
+                                props.battlefield.splice(i,1,{...card,tapped:true})
+                                console.log(props.battlefield)
+                                props.updater([...props.battlefield])
+                            }
                             if(card.tapped){
                                 image?.setAttribute("class",`${imageClass} rotate-90`)
                             }else{
                                 image?.setAttribute("class",`${imageClass} rotate-0`)
                             }
-                            // const number = document.getElementById(card.number.toString())?.textContent
-                            // const image = document.getElementById(card.name + i.toString())
-                            // if(Number(number) <= 1){
-                            //     card.tapped = !card.tapped
-                            // }else{
-                            //     card.number -= 1;
-                            //     props.battlefield.splice(i,1,{...card,tapped:true})
-                            //     console.log(props.battlefield)
-                            //     props.updater([...props.battlefield])
-                            // }
-                            // if(card.tapped){
-                            //     image?.setAttribute("class",`${imageClass} rotate-90`)
-                            // }else{
-                            //     image?.setAttribute("class",`${imageClass} rotate-0`)
-                            // }
                         }}   
                         onMouseDown={(e) => {
                             if(e.button == 1){
