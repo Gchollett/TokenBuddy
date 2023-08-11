@@ -1,5 +1,5 @@
+import cards from "@/utilities/dummyCards";
 import {battlefield} from "@/utilities/types";
-import { data } from "autoprefixer";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
 type Props = {
@@ -9,23 +9,7 @@ type Props = {
 }
 
 export default function CardForm(props:Props){
-    const cards = [{
-        name: "Adorned Pouncer",
-        power: 4,
-        toughness: 4,
-        frontImage: "https://cards.scryfall.io/border_crop/front/7/1/71dc8556-a658-40e1-8a93-6a62af208a28.jpg?1562639859",
-        number: 1,
-        tapped: false
-      },
-      {
-        name: "Ajani's Pridemate",
-        power: 2,
-        toughness: 2,
-        frontImage: "https://cards.scryfall.io/border_crop/front/b/0/b0819e8e-fb7e-43c7-a7cf-d768f43193ac.jpg?1592515934",
-        number: 1,
-        tapped: false
-      }];
-      function handleSubmit(e:FormEvent){
+    function handleSubmit(e:FormEvent){
         e.preventDefault();
         const form = e.target;
         //@ts-ignore
@@ -44,12 +28,18 @@ export default function CardForm(props:Props){
             }
         }
         props.dropDown(false)        
-      }
+    }
     return(
-        <form onSubmit={handleSubmit} className="inline cardForm">
-            <select className="bg-inherit" name="chosenCard">
+        <form onSubmit={handleSubmit} className="flex cardForm">
+            {/* <select className="bg-inherit" name="chosenCard">
                 {cards.map((card)=>(<option className="text-white" value={JSON.stringify(card)}>{card.name}</option>))}
-            </select>
+            </select> */}
+            <div>
+                <input className="bg-inherit text-inherit border border-grey-300 rounded" type='text'/>
+                <ul>
+                {cards.map((card)=>(<option className="text-white" value={JSON.stringify(card)}>{card.name}</option>))}
+                </ul>
+            </div>
             <button type="submit">Add</button>
         </form>
     )
