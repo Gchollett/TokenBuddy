@@ -18,7 +18,7 @@ export default function CardForm(props:Props){
         const dataEntries = [...formData.entries()]
         if(dataEntries !== undefined){
             const data = JSON.parse(dataEntries[0][1])
-            const existingIndex = props.battlefield.findIndex(card => card.name === data.name)
+            const existingIndex = props.battlefield.findIndex(card => card.name === data.name && !card.tapped)
             if(existingIndex !== -1){
                 const existingData = props.battlefield[existingIndex]
                 existingData.number += 1;
@@ -31,15 +31,9 @@ export default function CardForm(props:Props){
     }
     return(
         <form onSubmit={handleSubmit} className="flex cardForm">
-            {/* <select className="bg-inherit" name="chosenCard">
+            <select className="bg-inherit" name="chosenCard">
                 {cards.map((card)=>(<option className="text-white" value={JSON.stringify(card)}>{card.name}</option>))}
-            </select> */}
-            <div>
-                <input className="bg-inherit text-inherit border border-grey-300 rounded" type='text'/>
-                <ul>
-                {cards.map((card)=>(<option className="text-white" value={JSON.stringify(card)}>{card.name}</option>))}
-                </ul>
-            </div>
+            </select>
             <button type="submit">Add</button>
         </form>
     )
