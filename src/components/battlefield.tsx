@@ -23,12 +23,10 @@ export default function Battlefield(props:Props){
                             const existingUntappedCard = props.battlefield.find((untappedCard) => !untappedCard.tapped && untappedCard.name == card.name)
                             if(!card.tapped){
                                 card.number -= 1;
-                                console.log(existingTappedCard);
                                 if(existingTappedCard !== undefined){
                                     existingTappedCard.number += 1;
                                 } else {
                                     props.battlefield.splice(i,0,{...card,tapped:true,number:1})
-                                    // console.log(props.battlefield)
                                 }
                             }else{
                                 card.number -= 1;
@@ -54,11 +52,9 @@ export default function Battlefield(props:Props){
                             const number = document.getElementById(card.number.toString())?.textContent
                             if(Number(number) <= 1){
                                 props.battlefield.splice(i,1)
-                                // props.updater([...props.battlefield])
                                 battlefieldGenerator(props.updater,props.battlefield)
                             }else{
                                 card.number -= 1;
-                                // props.updater([...props.battlefield])
                                 battlefieldGenerator(props.updater,props.battlefield)
                             }
                     }} className={`${imageClass} ${card.tapped ? 'rotate-90':'rotate-0'}`} src={card.frontImage}></img>

@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -27,14 +27,11 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.cardForm option {
-  background-color: black;
-}
-
-.cardForm button {
-  margin-left: 10px;
-}
-
 .cardNumber {
   min-width: 10px;
+}
+
+table, th{
+  border: solid white;
+  border-collapse: collapse;
 }
