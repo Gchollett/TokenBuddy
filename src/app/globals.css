@@ -16,6 +16,10 @@
   }
 }
 
+::-webkit-scrollbar{
+  width: 0;
+}
+
 body {
   font-family: 'Times New Roman', Times, serif;
   color: rgb(var(--foreground-rgb));
@@ -27,11 +31,10 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.cardNumber {
-  min-width: 10px;
+button {
+  margin-left: 10px;
 }
 
-table, th{
-  border: solid white;
-  border-collapse: collapse;
+.cardNumber {
+  min-width: 10px;
 }
