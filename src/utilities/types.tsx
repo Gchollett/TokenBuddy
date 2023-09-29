@@ -1,5 +1,6 @@
 
 export type card = {
+    id: string,
     name: string,
     power: number,
     toughness: number,

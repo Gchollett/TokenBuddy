@@ -1,5 +1,6 @@
 'use client'
 
+import battlefieldGenerator from "@/utilities/battlefieldGenerator"
 import {battlefield} from "@/utilities/types"
 import { Dispatch, SetStateAction } from "react"
 
@@ -18,27 +19,29 @@ export default function Battlefield(props:Props){
                     <img key={i} id={card.name + i.toString()} 
                         onClick={()=> {
                             const image = document.getElementById(card.name + i.toString())
-                            card.tapped = !card.tapped
+                            const existingTappedCard = props.battlefield.find((tappedCard) => tappedCard.tapped && tappedCard.name == card.name)
+                            const existingUntappedCard = props.battlefield.find((untappedCard) => !untappedCard.tapped && untappedCard.name == card.name)
+                            if(!card.tapped){
+                                card.number -= 1;
+                                if(existingTappedCard !== undefined){
+                                    existingTappedCard.number += 1;
+                                } else {
+                                    props.battlefield.splice(i,0,{...card,tapped:true,number:1})
+                                }
+                            }else{
+                                card.number -= 1;
+                                if(existingUntappedCard !== undefined){
+                                    existingUntappedCard.number += 1;
+                                } else {
+                                    props.battlefield.splice(i,0,{...card,tapped:false,number:1})
+                                }
+                            }
                             if(card.tapped){
                                 image?.setAttribute("class",`${imageClass} rotate-90`)
                             }else{
                                 image?.setAttribute("class",`${imageClass} rotate-0`)
                             }
-                            // const number = document.getElementById(card.number.toString())?.textContent
-                            // const image = document.getElementById(card.name + i.toString())
-                            // if(Number(number) <= 1){
-                            //     card.tapped = !card.tapped
-                            // }else{
-                            //     card.number -= 1;
-                            //     props.battlefield.splice(i,1,{...card,tapped:true})
-                            //     console.log(props.battlefield)
-                            //     props.updater([...props.battlefield])
-                            // }
-                            // if(card.tapped){
-                            //     image?.setAttribute("class",`${imageClass} rotate-90`)
-                            // }else{
-                            //     image?.setAttribute("class",`${imageClass} rotate-0`)
-                            // }
+                            battlefieldGenerator(props.updater,props.battlefield)
                         }}   
                         onMouseDown={(e) => {
                             if(e.button == 1){
@@ -49,12 +52,12 @@ export default function Battlefield(props:Props){
                             const number = document.getElementById(card.number.toString())?.textContent
                             if(Number(number) <= 1){
                                 props.battlefield.splice(i,1)
-                                props.updater([...props.battlefield])
+                                battlefieldGenerator(props.updater,props.battlefield)
                             }else{
                                 card.number -= 1;
-                                props.updater([...props.battlefield])
+                                battlefieldGenerator(props.updater,props.battlefield)
                             }
-                    }} className={`${imageClass} ${!card.tapped ? 'rotate 90':'rotate 0'}`} src={card.frontImage}></img>
+                    }} className={`${imageClass} ${card.tapped ? 'rotate-90':'rotate-0'}`} src={card.frontImage}></img>
                 </div>
             ))}
         </>

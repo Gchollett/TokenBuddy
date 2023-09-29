@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -16,6 +16,10 @@
   }
 }
 
+::-webkit-scrollbar{
+  width: 0;
+}
+
 body {
   font-family: 'Times New Roman', Times, serif;
   color: rgb(var(--foreground-rgb));
@@ -27,11 +31,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.cardForm option {
-  background-color: black;
-}
-
-.cardForm button {
+button {
   margin-left: 10px;
 }
 
