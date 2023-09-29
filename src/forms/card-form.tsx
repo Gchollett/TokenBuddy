@@ -1,3 +1,4 @@
+'use client'
 import useClient from "@/hooks/use-client";
 import {battlefield, card} from "@/utilities/types";
 import Select, { StylesConfig } from "react-select"
