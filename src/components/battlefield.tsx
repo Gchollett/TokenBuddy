@@ -15,9 +15,9 @@ export default function Battlefield(props:Props){
     return(
         <>
             {props.battlefield.map((card,i) => (
-                <div key={i} className="lg:w-1/6 w-1/3 h-fit">
+                <div key={i} className="it w-1/4 h-fit">
                     <p key={i} id={card.number.toString()} className="ml-4 bg-gray-300 text-black rounded px-1 w-fit cardNumber">{card.number}</p>
-                    <Image alt={"card"} key={i} id={card.name + i.toString()} 
+                    <img alt={"card"} key={i} id={card.name + i.toString()} 
                         onClick={()=> {
                             const image = document.getElementById(card.name + i.toString())
                             const existingTappedCard = props.battlefield.find((tappedCard) => tappedCard.tapped && tappedCard.name == card.name)
