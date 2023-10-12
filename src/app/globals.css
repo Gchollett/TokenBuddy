@@ -16,6 +16,13 @@
   }
 }
 
+
+@media (min-width: 1024px){
+  .it {
+    width: 12%;
+  }
+}
+
 ::-webkit-scrollbar{
   width: 0;
 }
