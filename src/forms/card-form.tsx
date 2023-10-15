@@ -5,6 +5,7 @@ import Select, { StylesConfig } from "react-select"
 import {Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
 
 type Props = {
+    popup : Dispatch<SetStateAction<boolean>>,
     battlefield : battlefield,
     adder : Dispatch<SetStateAction<battlefield>>,
     dropDown : Dispatch<SetStateAction<boolean>>
@@ -24,7 +25,12 @@ export default function CardForm(props:Props){
     useEffect(() => {
         client.get("/cards")
             .then(response => setCards(response.data.cards))
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+                if(error.message == 'Network Error'){
+                    props.popup(true);
+                }
+            })
     },[])
     function handleSubmit(e:FormEvent){
         e.preventDefault();
@@ -53,6 +59,7 @@ export default function CardForm(props:Props){
         }
         props.dropDown(false)        
     }
+    if(cards.length !== 0) props.popup(false)
     return(
         (cards.length === 0) ? 
         <p>Loading...</p> 
