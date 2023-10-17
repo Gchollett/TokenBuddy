@@ -66,6 +66,8 @@ export default function CardForm(props:Props){
         :
         <form onSubmit={handleSubmit} id="cardForm" className="flex cardForm">
             <Select
+                required
+                autoFocus
                 name="chosenCard"
                 isSearchable
                 styles={styles}
