@@ -11,11 +11,11 @@ type Props = {
 }
 
 export default function Battlefield(props:Props){
-    const imageClass = "px-6 transition-transform card"
+    const imageClass = "w-max h-max px-6 transition-transform"
     return(
         <>
             {props.battlefield.map((card,i) => (
-                <div key={i+'d'} className="it w-1/4 h-fit">
+                <div key={i+'d'} className="it w-1/4">
                     <p key={i+'p'} id={card.number.toString()} className="ml-4 bg-gray-300 text-black rounded px-1 w-fit cardNumber">{card.number}</p>
                     <img alt={"card"} key={i+'i'} id={card.name + i.toString()} 
                         onClick={()=> {
