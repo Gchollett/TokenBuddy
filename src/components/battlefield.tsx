@@ -18,36 +18,35 @@ export default function Battlefield(props:Props){
                 <div key={i+'d'} className="it w-1/4 h-fit max-h-min">
                     <p key={i+'p'} id={card.number.toString()} className="ml-4 bg-gray-300 text-black rounded px-1 w-fit cardNumber">{card.number}</p>
                     <img alt={"card"} key={i+'i'} id={card.name + i.toString()} 
-                        onClick={()=> {
+                        onClick={(event)=> {
                             const image = document.getElementById(card.name + i.toString())
-                            const existingTappedCard = props.battlefield.find((tappedCard) => tappedCard.tapped && tappedCard.name == card.name)
-                            const existingUntappedCard = props.battlefield.find((untappedCard) => !untappedCard.tapped && untappedCard.name == card.name)
-                            if(!card.tapped){
-                                card.number -= 1;
-                                if(existingTappedCard !== undefined){
-                                    existingTappedCard.number += 1;
-                                } else {
-                                    props.battlefield.splice(i,0,{...card,tapped:true,number:1})
-                                }
+                            if(event.shiftKey){
+                                card.number += 1;
                             }else{
-                                card.number -= 1;
-                                if(existingUntappedCard !== undefined){
-                                    existingUntappedCard.number += 1;
-                                } else {
-                                    props.battlefield.splice(i,0,{...card,tapped:false,number:1})
+                                if(!card.tapped){
+                                    card.number -= 1;
+                                    const existingTappedCard = props.battlefield.find((tappedCard) => tappedCard.tapped && tappedCard.name == card.name)
+                                    if(existingTappedCard !== undefined){
+                                        existingTappedCard.number += 1;
+                                    } else {
+                                        props.battlefield.splice(i,0,{...card,tapped:true,number:1})
+                                    }
+                                }else{
+                                    card.number -= 1;
+                                    const existingUntappedCard = props.battlefield.find((untappedCard) => !untappedCard.tapped && untappedCard.name == card.name)
+                                    if(existingUntappedCard !== undefined){
+                                        existingUntappedCard.number += 1;
+                                    } else {
+                                        props.battlefield.splice(i,0,{...card,tapped:false,number:1})
+                                    }
                                 }
-                            }
-                            if(card.tapped){
-                                image?.setAttribute("class",`${imageClass} rotate-90`)
-                            }else{
-                                image?.setAttribute("class",`${imageClass} rotate-0`)
+                                if(card.tapped){
+                                    image?.setAttribute("class",`${imageClass} rotate-90`)
+                                }else{
+                                    image?.setAttribute("class",`${imageClass} rotate-0`)
+                                }
                             }
                             battlefieldGenerator(props.updater,props.battlefield)
-                        }}   
-                        onMouseDown={(e) => {
-                            if(e.button == 1){
-                                console.log('hi')
-                            }
                         }}
                         onAuxClick={() => {
                             const number = document.getElementById(card.number.toString())?.textContent
