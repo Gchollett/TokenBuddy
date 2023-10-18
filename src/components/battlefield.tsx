@@ -2,14 +2,18 @@
 
 import battlefieldGenerator from "@/utilities/battlefieldGenerator"
 import {battlefield} from "@/utilities/types"
-import Image from "next/image"
 import { Dispatch, SetStateAction } from "react"
 
 type Props = {
     battlefield : battlefield,
     updater: Dispatch<SetStateAction<battlefield>>
 }
-
+/**
+ * Maps all the cards from a battleifield into an html format to display.
+ * @param battlefield - battlefield (list of cards)
+ * @param updater - Dispatch<SetStateAction<battlefield>> (Set function for a useState)
+ * @returns The html for the battlefield
+ */
 export default function Battlefield(props:Props){
     const imageClass = "px-6 transition-transform"
     return(

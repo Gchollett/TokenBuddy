@@ -17,7 +17,14 @@ const styles : StylesConfig = {
         ...styles,
     })
 }
-
+/**
+ * 
+ * @param popup - Set function for popup boolean
+ * @param battlefield - battlefield to update
+ * @param adder - update function for battlefield
+ * @param dropDown - Set function for drop down boolean 
+ * @returns - The html for the card form
+ */
 export default function CardForm(props:Props){
     const client = useClient();
     const start : battlefield = []

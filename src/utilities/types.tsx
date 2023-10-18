@@ -1,4 +1,3 @@
-
 export type card = {
     id: string,
     name: string,

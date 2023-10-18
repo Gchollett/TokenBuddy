@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+
+/**
+ * Makes an instance of an axios client
+ * @returns The client instance
+ */
 const useClient = () => {
     const client = axios.create({
         baseURL: process.env.NEXT_PUBLIC_API_URL,

@@ -10,6 +10,14 @@ type Props = {
     popup: Dispatch<SetStateAction<boolean>>
 }
 
+/**
+ * 
+ * @param battlefield - The battlefield to update
+ * @param adder - the battlefield update function
+ * @param popup - the Set function for the popup
+ * @returns The html for the card adding button
+ */
+
 export default function CardAdder(props:Props){
       const [dropDown,setDropDown] = useState(false)
       const formRef = useRef(null)
