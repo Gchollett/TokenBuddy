@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react"
 
 export type card = {
     id: string,
@@ -10,3 +11,8 @@ export type card = {
 }
 
 export type battlefield = card[]
+
+export type playMatt = {
+    battlefield: battlefield,
+    updater: Dispatch<SetStateAction<battlefield>>,
+}

@@ -1,16 +1,13 @@
 'use client'
 
 import CardForm from "@/forms/card-form";
-import {battlefield} from "@/utilities/types";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState } from "react";
 
-type Props = {
-    battlefield : battlefield,
-    adder : Dispatch<SetStateAction<battlefield>>,
-    popup: Dispatch<SetStateAction<boolean>>
-}
+/**
+ * @returns The html for the card adding button
+ */
 
-export default function CardAdder(props:Props){
+export default function CardAdder(){
       const [dropDown,setDropDown] = useState(false)
       const formRef = useRef(null)
       const handleOutsideClick = (e : Event) => {
@@ -29,7 +26,7 @@ export default function CardAdder(props:Props){
         <div ref={formRef} onClick={()=>{
                 setDropDown(true);
             }} className={`grid text-2xl h-12 ${!dropDown ? 'hover:border-green-300 hover:text-green-300 cursor-pointer' : 'cursor-default'} transition-color w-full p-1 justify-center content-center border border-gray-300 rounded bg-inherit`}>
-            {dropDown ? <CardForm popup={props.popup} adder={props.adder} battlefield={props.battlefield} dropDown={setDropDown}/> : <p className="text-inherit">+</p>}
+            {dropDown ? <CardForm dropDown={setDropDown}/> : <p className="text-inherit">+</p>}
         </div>
     )
 }

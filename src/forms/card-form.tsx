@@ -2,12 +2,11 @@
 import useClient from "@/hooks/use-client";
 import {battlefield, card} from "@/utilities/types";
 import Select, { StylesConfig } from "react-select"
-import {Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
+import {Dispatch, FormEvent, SetStateAction, useContext, useEffect, useState } from "react";
+import { BattlefieldContext, BattlefieldUpdaterContext } from "@/hooks/useBattlefield";
+import { PopupContext } from "@/hooks/usePopup";
 
 type Props = {
-    popup : Dispatch<SetStateAction<boolean>>,
-    battlefield : battlefield,
-    adder : Dispatch<SetStateAction<battlefield>>,
     dropDown : Dispatch<SetStateAction<boolean>>
 }
 
@@ -17,8 +16,14 @@ const styles : StylesConfig = {
         ...styles,
     })
 }
-
+/**
+ * @param dropDown - Set function for drop down boolean 
+ * @returns - The html for the card form
+ */
 export default function CardForm(props:Props){
+    const battlefield = useContext(BattlefieldContext)
+    const updater = useContext(BattlefieldUpdaterContext)
+    const setPopup = useContext(PopupContext)
     const client = useClient();
     const start : battlefield = []
     const [cards, setCards] = useState(start);
@@ -26,9 +31,8 @@ export default function CardForm(props:Props){
         client.get("/cards")
             .then(response => setCards(response.data.cards))
             .catch(error => {
-                // console.log(error)
                 if(error.message == 'Network Error'){
-                    props.popup(true);
+                    setPopup(true);
                 }
             })
     },[])
@@ -47,19 +51,19 @@ export default function CardForm(props:Props){
                 return console.error(e);
             }
             if(data){
-                const existingIndex = props.battlefield.findIndex(card => card.id === data.id && !card.tapped)
+                const existingIndex = battlefield.findIndex(card => card.id === data.id && !card.tapped)
                 if(existingIndex !== -1){
-                    const existingData = props.battlefield[existingIndex]
+                    const existingData = battlefield[existingIndex]
                     existingData.number += 1;
-                    props.adder([...props.battlefield])
+                    updater([...battlefield])
                 }else{
-                    props.adder(props.battlefield.concat([{...data,number: 1,tapped: false}]))
+                    updater(battlefield.concat([{...data,number: 1,tapped: false}]))
                 }
             }
         }
         props.dropDown(false)        
     }
-    if(cards.length !== 0) props.popup(false)
+    if(cards.length !== 0) setPopup(false)
     return(
         (cards.length === 0) ? 
         <p>Loading...</p> 
