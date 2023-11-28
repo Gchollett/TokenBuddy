@@ -34,6 +34,7 @@ export default function CardForm(props:Props){
                 if(error.message == 'Network Error'){
                     setPopup(true);
                 }
+                console.log(error)
             })
     },[])
     function handleSubmit(e:FormEvent){

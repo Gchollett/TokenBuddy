@@ -31,7 +31,7 @@ export default function Home() {
         </div>
         <div className='absolute mt-2 px-4 left-0 top-36 flex flex-wrap w-full'>
           <Battlefield/>
-          {popup? <div className='mt-5 mx-auto text-center bg-white text-black rounded opacity-75 '><p className=''>Sorry! We are currently having problems with our SSL verification. To rectify this issue, click on the following link and choose to proceed to the webste. Upon doing so, come back and everything should work.</p><a onClick={() => setPopup(false)} className='underline w-fit' href="https://18.218.214.66" target='_blank'>Token Buddy Backend</a></div> : <></>}
+          {popup? <div className='mt-5 mx-auto text-center bg-white text-black rounded opacity-75 '><p className=''>Sorry but our backend server is temporarily down :( We don't know when it will be back up. If you would like to use our service, go to my <a className='underline text-red-600' href={"https://github.com/Gchollett/TokenBuddy"} target="_blank">github</a> and copy the repositories :)</p></div> : <></>}
         </div>
       </main>
     </BattlefieldContext.Provider>
