@@ -31,8 +31,8 @@ export default function Home() {
         </div>
         <div className='absolute mt-2 px-4 left-0 top-36 flex flex-wrap w-full'>
           <Battlefield/>
+          {popup? <div className='mt-5 mx-auto text-center bg-white text-black rounded opacity-75 '><p>Sorry but our backend server is temporarily down :( We don&#39;t know when it will be back up. If you would like to use our service, go to my <a className='underline text-red-600' href={"https://github.com/Gchollett/TokenBuddyBackend"} target="_blank">github</a> and copy the repository for the backend we use to host it locally :)</p></div> : <></>}
         </div>
-        {popup? <div className='mt-5 mx-auto text-center bg-white text-black rounded opacity-75 '><p>Sorry but our backend server is temporarily down :() We don&apost know when it will be back up. If you would like to use our service, go to my <a className='underline text-red-600' href={"https://github.com/Gchollett/TokenBuddyBackend"} target="_blank">github</a> and copy the repository for the backend we use to host it locally :)</p></div> : <></>}
       </main>
     </BattlefieldContext.Provider>
     </BattlefieldUpdaterContext.Provider>
