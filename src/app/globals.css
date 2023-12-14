@@ -43,4 +43,5 @@ button {
 
 .cardNumber {
   min-width: 10px;
+  cursor: pointer;
 }
