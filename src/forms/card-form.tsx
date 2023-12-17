@@ -58,7 +58,7 @@ export default function CardForm(props:Props){
                     existingData.number += 1;
                     updater([...battlefield])
                 }else{
-                    updater(battlefield.concat([{...data,number: 1,tapped: false}]))
+                    updater(battlefield.concat([{...data,face_number:0,number: 1,tapped: false}]))
                 }
             }
         }

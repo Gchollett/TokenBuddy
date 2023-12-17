@@ -16,6 +16,7 @@ export default function Card(props:Props){
     const imageClass = "px-6 transition-transform"
     const [editing,setEditStatus] = useState(false)
     const [number,setNumber] = useState(props.card.number)
+    // const [face,setFace] = useState(0)
     const cardNumberRef = useRef(null)
     const handleOutsideClick = (e : Event) => {
     // @ts-ignore
@@ -62,6 +63,8 @@ export default function Card(props:Props){
                 const image = document.getElementById(props.card.name + props.i.toString())
                 if(event.shiftKey){
                     props.card.number += 1;
+                }else if(event.ctrlKey){
+                    props.card.number-=1;
                 }else{
                     if(!props.card.tapped){
                         props.card.number -= 1;
@@ -89,14 +92,10 @@ export default function Card(props:Props){
                 battlefieldGenerator(updater,battlefield)
             }}
             onAuxClick={() => {
-                const number = document.getElementById(props.card.number.toString())?.textContent
-                if(Number(number) <= 1){
-                    battlefield.splice(props.i,1)
-                }else{
-                    props.card.number -= 1;
-                }
+                if(props.card.face_number == 0) props.card.face_number = 1
+                else props.card.face_number = 0
                 battlefieldGenerator(updater,battlefield)
-        }} className={`${imageClass} ${props.card.tapped ? 'rotate-90':'rotate-0'}`} src={props.card.frontImage}/>
+        }} className={`${imageClass} ${props.card.tapped ? 'rotate-90':'rotate-0'}`} src={props.card.multiFaced ? props.card.faces[props.card.face_number].image : props.card.face_number===0 ?props.card.image : "http://eakett.ca/mtgimage/cardback.jpg"}/>
     </div>
     )
 }
