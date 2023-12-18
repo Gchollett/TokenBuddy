@@ -45,3 +45,13 @@ button {
   min-width: 10px;
   cursor: pointer;
 }
+
+.side-bar {
+  width: 250px;
+  z-index: 1;
+  transition: 0.5s;
+}
+
+.side-bar.closed{
+  width: 0;
+}

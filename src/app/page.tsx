@@ -2,6 +2,7 @@
 
 import Battlefield from '@/components/battlefield'
 import CardAdder from '@/components/cardAdder'
+import SideBar from '@/components/sidebar';
 import { BattlefieldContext, BattlefieldUpdaterContext } from '@/hooks/useBattlefield';
 import { PopupContext } from '@/hooks/usePopup';
 import {battlefield} from '@/utilities/types';
@@ -9,8 +10,6 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [popup,setPopup] = useState(false);
-  const [monarch,setMonarch] = useState(false)
-  const [initiative,setInitiative] = useState(false)
   useEffect(()=>{
     window.addEventListener('beforeunload', function (e) {
       e.preventDefault();
@@ -28,8 +27,7 @@ export default function Home() {
     <BattlefieldContext.Provider value={battlefield}>
       <main className="content-center min-h-screen px-1">
         <h1 className="absolute text-3xl left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">Token Buddy</h1>
-        <h2 className={`absolute right-10 top-5 cursor-pointer ${monarch?"text-yellow-400":""}`} onClick={()=>{setMonarch(!monarch)}}>MONARCH</h2>
-        <h2 className={`absolute right-10 top-11 cursor-pointer ${initiative?"text-red-400":""}`} onClick={()=>{setInitiative(!initiative)}}>INITIATIVE</h2>
+        <SideBar/>
         <div className='absolute px-1 left-0 top-24 w-screen'>
           <CardAdder/>
         </div>
