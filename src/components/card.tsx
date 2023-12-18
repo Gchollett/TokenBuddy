@@ -9,14 +9,18 @@ type Props = {
     card :  card,
     i : number
 }
-
+/**
+ * 
+ * @param card - the card json data
+ * @param i - a number in order to assign to the id
+ * @returns the html for the card
+ */
 export default function Card(props:Props){
     const battlefield = useContext(BattlefieldContext)
     const updater = useContext(BattlefieldUpdaterContext)
     const imageClass = "px-6 transition-transform"
     const [editing,setEditStatus] = useState(false)
     const [number,setNumber] = useState(props.card.number)
-    // const [face,setFace] = useState(0)
     const cardNumberRef = useRef(null)
     const handleOutsideClick = (e : Event) => {
     // @ts-ignore
@@ -59,16 +63,16 @@ export default function Card(props:Props){
             />
         }
         <img alt={"card"} key={props.i+'i'} id={props.card.name + props.i.toString()} 
-            onClick={(event)=> {
+            onClick={(event)=> { 
                 const image = document.getElementById(props.card.name + props.i.toString())
-                if(event.shiftKey){
+                if(event.shiftKey){ // shift clicking increases the number of cards by one
                     props.card.number += 1;
-                }else if(event.ctrlKey){
+                }else if(event.ctrlKey){ // ctrl clicking decreases the number of cards by one
                     props.card.number-=1;
                 }else{
-                    if(!props.card.tapped){
+                    if(!props.card.tapped){ // normal clicking will tap/untap cards (creating new card piles for the tapped and untapped versions)
                         props.card.number -= 1;
-                        const existingTappedCard = battlefield.find((tappedCard) => tappedCard.tapped && tappedCard.name == props.card.name)
+                        const existingTappedCard = battlefield.find((tappedCard) => tappedCard.tapped && tappedCard.id == props.card.id && tappedCard.face_number === props.card.face_number) //Checks if there exists a tapped card that is on the same face as well
                         if(existingTappedCard !== undefined){
                             existingTappedCard.number += 1;
                         } else {
@@ -76,7 +80,7 @@ export default function Card(props:Props){
                         }
                     }else{
                         props.card.number -= 1;
-                        const existingUntappedCard = battlefield.find((untappedCard) => !untappedCard.tapped && untappedCard.name == props.card.name)
+                        const existingUntappedCard = battlefield.find((untappedCard) => !untappedCard.tapped && untappedCard.id == props.card.id && untappedCard.face_number === props.card.face_number) //Checks if there exists an untapped card that is on the same face as well
                         if(existingUntappedCard !== undefined){
                             existingUntappedCard.number += 1;
                         } else {
@@ -91,11 +95,27 @@ export default function Card(props:Props){
                 }
                 battlefieldGenerator(updater,battlefield)
             }}
-            onAuxClick={() => {
-                if(props.card.face_number == 0) props.card.face_number = 1
-                else props.card.face_number = 0
+            onAuxClick={() => { //reverses the faces
+                if(props.card.face_number == 0) {
+                    const existingCard = battlefield.find((card) => card.tapped === props.card.tapped && card.id == props.card.id && card.face_number === 1)
+                    props.card.number -=1;
+                    if(existingCard === undefined){
+                        battlefield.splice(props.i,0,{...props.card,face_number:1,number:1})
+                    }else{
+                        existingCard.number +=1;
+                    }
+                }else{
+                    const existingCard = battlefield.find((card) => card.tapped === props.card.tapped && card.id == props.card.id && card.face_number === 0)
+                    props.card.number -= 1;
+                    if(existingCard === undefined){
+                        battlefield.splice(props.i,0,{...props.card,face_number:0,number:1})
+                    }else{
+                        existingCard.number += 1;
+                    }
+                }
                 battlefieldGenerator(updater,battlefield)
-        }} className={`${imageClass} ${props.card.tapped ? 'rotate-90':'rotate-0'}`} src={props.card.multiFaced ? props.card.faces[props.card.face_number].image : props.card.face_number===0 ?props.card.image : "http://eakett.ca/mtgimage/cardback.jpg"}/>
+            }}
+            className={`${imageClass} ${props.card.tapped ? 'rotate-90':'rotate-0'}`} src={props.card.multiFaced ? props.card.faces[props.card.face_number].image : props.card.face_number===0 ?props.card.image : "http://eakett.ca/mtgimage/cardback.jpg"}/>
     </div>
     )
 }
