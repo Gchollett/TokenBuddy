@@ -11,7 +11,7 @@ type Props = {
 }
 
 const styles : StylesConfig = {
-    control: (styles) => ({...styles, minWidth: '250px', width: 'fit', backgroundColor: 'black'}),
+    control: (styles,state) => ({...styles, border:'none', minWidth: '250px', width: 'fit', backgroundColor: 'black'}),
     option: (styles) => ({
         ...styles,
     })
@@ -71,6 +71,7 @@ export default function CardForm(props:Props){
         :
         <form onSubmit={handleSubmit} id="cardForm" className="flex cardForm">
             <Select
+                placeholder='Scry a Token'
                 required
                 autoFocus
                 name="chosenCard"
@@ -96,7 +97,7 @@ export default function CardForm(props:Props){
                     })
                 }
             />
-            <button type="submit" className="ml-3">Add</button>
+            <button type="submit" className="ml-3">+</button>
         </form>
     )
 }

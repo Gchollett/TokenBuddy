@@ -52,6 +52,10 @@ button {
   transition: 0.5s;
 }
 
+.side-bar button {
+  top: calc(50% - 12px);
+}
+
 .side-bar.closed{
-  width: 0;
+  right: -250px;
 }

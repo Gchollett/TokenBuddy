@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='w-full overflow-hidden'>{children}</body>
+      <body className='w-full overflow-x-hidden'>{children}</body>
     </html>
   )
 }
