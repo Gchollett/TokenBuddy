@@ -65,13 +65,17 @@ export default function SideBar(){
                 <div className="grid h-fit w-full cursor-pointer pb-1" 
                     onClick={()=>{
                         setInitiative(!initiative)
-                        if(!initiative && enteredDungeon.name===undefined){
-                            setEnteredDungeon({
-                                name: "Undercity",
-                                image: "https://cards.scryfall.io/border_crop/back/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1676232820",
-                                room: 0
-                            })
-                            setDungeon(true)
+                        if(!initiative){
+                            if(enteredDungeon.name===undefined){
+                                setEnteredDungeon({
+                                    name: "Undercity",
+                                    image: "https://cards.scryfall.io/border_crop/back/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1676232820",
+                                    room: 1
+                                })
+                                setDungeon(true)
+                            }else{
+                                setEnteredDungeon({...enteredDungeon,room:(enteredDungeon.room+1)})
+                            }
                         }
                     }}>
                     <p className='justify-self-center pb-1'>{initiative?<CasinoIcon/>:<CasinoOutlinedIcon/>} Initiative</p>
@@ -98,7 +102,7 @@ export default function SideBar(){
                                                         list.push({
                                                             name: element.name,
                                                             image: element.image_uris?.border_crop,
-                                                            room: 0
+                                                            room: 1
                                                         });
                                                     }
                                                     setDungeons(list);
@@ -109,7 +113,7 @@ export default function SideBar(){
                                 }}
                             >
                             {showDungeons?dungeons.map(el => <p key={el.name} className='text-center hover:text-green-300' onClick={()=>setEnteredDungeon(el)}>{el.name}</p>):<p className='self-center justify-self-center text-[35px]'>+</p>}
-                            </div>:<img className="justify-self-center rounded-md w-[75%]" src={enteredDungeon.image} onClick={()=>setEnteredDungeon({...enteredDungeon,room:(enteredDungeon.room+1)})} onAuxClick={()=>setEnteredDungeon(defaultDungeon)}></img>
+                            </div>:<img className="justify-self-center rounded-md w-[75%] cursor-pointer" src={enteredDungeon.image} onClick={()=>setEnteredDungeon({...enteredDungeon,room:(enteredDungeon.room+1)})} onAuxClick={()=>setEnteredDungeon(defaultDungeon)}></img>
                         ):<></>
                     }
                 </div>
