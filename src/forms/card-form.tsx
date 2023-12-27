@@ -29,7 +29,10 @@ export default function CardForm(props:Props){
     const [cards, setCards] = useState(start);
     useEffect(() => {
         client.get("/cards")
-            .then(response => setCards(response.data.cards))
+            .then(response => {
+                if(response.status == 200)setCards(response.data.cards)
+                else setPopup(true)
+            })
             .catch(error => {
                 if(error.message == 'Network Error'){
                     setPopup(true);
