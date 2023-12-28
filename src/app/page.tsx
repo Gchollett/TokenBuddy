@@ -2,15 +2,16 @@
 
 import Battlefield from '@/components/battlefield'
 import CardAdder from '@/components/cardAdder'
+import SideBar from '@/components/sidebar';
 import { BattlefieldContext, BattlefieldUpdaterContext } from '@/hooks/useBattlefield';
-import { PopupContext } from '@/hooks/usePopup';
+// import { PopupContext } from '@/hooks/usePopup';
 import {battlefield} from '@/utilities/types';
 import { useEffect, useState } from 'react';
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
-  const [popup,setPopup] = useState(false);
-  const [monarch,setMonarch] = useState(false)
-  const [initiative,setInitiative] = useState(false)
+  // const [popup,setPopup] = useState(false);
   useEffect(()=>{
     window.addEventListener('beforeunload', function (e) {
       e.preventDefault();
@@ -20,26 +21,33 @@ export default function Home() {
       e.preventDefault();
     })
   })
+  useEffect(()=>{
+    toast.info("Now using the Scryfall API!")
+  },[])
   const start : battlefield = []
   const [battlefield,setBattlefield] = useState(start);
   return (
-    <PopupContext.Provider value={setPopup}>
+    // <PopupContext.Provider value={setPopup}>
     <BattlefieldUpdaterContext.Provider value = {setBattlefield}>
     <BattlefieldContext.Provider value={battlefield}>
       <main className="content-center min-h-screen px-1">
         <h1 className="absolute text-3xl left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">Token Buddy</h1>
-        <h2 className={`absolute right-10 top-5 cursor-pointer ${monarch?"text-yellow-400":""}`} onClick={()=>{setMonarch(!monarch)}}>MONARCH</h2>
-        <h2 className={`absolute right-10 top-11 cursor-pointer ${initiative?"text-red-400":""}`} onClick={()=>{setInitiative(!initiative)}}>INITIATIVE</h2>
+        <SideBar/>
         <div className='absolute px-1 left-0 top-24 w-screen'>
           <CardAdder/>
         </div>
         <div className='absolute mt-2 px-4 left-0 top-36 flex flex-wrap w-full'>
           <Battlefield/>
-          {popup? <div className='mt-5 mx-auto text-center bg-white text-black rounded opacity-75 '><p>Sorry but our backend server is temporarily down :( We don&#39;t know when it will be back up. If you would like to use our service, go to my <a className='underline text-red-600' href={"https://github.com/Gchollett/TokenBuddyBackend"} target="_blank">github</a> and copy the repository for the backend we use to host it locally :)</p></div> : <></>}
+          {/* {popup? <div className='mt-5 mx-auto text-center bg-white text-black rounded opacity-75 '><p>Sorry but our backend server is temporarily down :( We don&#39;t know when it will be back up. If you would like to use our service, go to my <a className='underline text-red-600' href={"https://github.com/Gchollett/TokenBuddyBackend"} target="_blank">github</a> and copy the repository for the backend we use to host it locally :)</p></div> : <></>} */}
+        </div>
+        <div>
+          <ToastContainer
+            theme="dark"
+          />
         </div>
       </main>
     </BattlefieldContext.Provider>
     </BattlefieldUpdaterContext.Provider>
-    </PopupContext.Provider>
+    // </PopupContext.Provider>
   )
 }
