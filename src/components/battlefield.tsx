@@ -13,7 +13,7 @@ export default function Battlefield(){
     return(
         <>
             {battlefield.map((card,i) => (
-                <Card card={card} key={i} i={i}/>
+                <Card key={i} card={card} i={i}/>
             ))}
         </>
     )
