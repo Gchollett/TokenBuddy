@@ -119,7 +119,7 @@ export default function Card(props:Props){
                 }
                 battlefieldGenerator(updater,battlefield)
             }}
-            className={`${imageClass} ${props.card.tapped ? 'rotate-90':'rotate-0'}`} src={props.card.multiFaced ? props.card.faces[props.card.face_number].image : props.card.face_number===0 ?props.card.image : "http://eakett.ca/mtgimage/cardback.jpg"}/>
+            className={`${imageClass} ${props.card.tapped ? 'rotate-90':'rotate-0'}`} src={props.card.multiFaced ? props.card.faces[props.card.face_number].image : props.card.face_number===0 ?props.card.image : "https://assets.moxfield.net/assets/images/missing-image.png"}/>
             <p className="text-center">{
                 props.card.multiFaced?
                 props.card.faces[props.card.face_number].name
