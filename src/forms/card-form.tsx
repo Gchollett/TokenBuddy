@@ -1,10 +1,12 @@
 'use client'
-import useClient from "@/hooks/use-client";
+// import useClient from "@/hooks/use-client";
 import {battlefield, card} from "@/utilities/types";
 import Select, { StylesConfig } from "react-select"
 import {Dispatch, FormEvent, SetStateAction, useContext, useEffect, useState } from "react";
 import { BattlefieldContext, BattlefieldUpdaterContext } from "@/hooks/useBattlefield";
 import { PopupContext } from "@/hooks/usePopup";
+import fetchData from "@/utilities/fetchCards";
+import { toast } from "react-toastify";
 
 type Props = {
     dropDown : Dispatch<SetStateAction<boolean>>
@@ -23,23 +25,31 @@ const styles : StylesConfig = {
 export default function CardForm(props:Props){
     const battlefield = useContext(BattlefieldContext)
     const updater = useContext(BattlefieldUpdaterContext)
-    const setPopup = useContext(PopupContext)
-    const client = useClient();
+    // const setPopup = useContext(PopupContext)
+    // const client = useClient();
     const start : battlefield = []
     const [cards, setCards] = useState(start);
     useEffect(() => {
-        client.get("/cards")
-            .then(response => {
-                if(response.status == 200)setCards(response.data.cards)
-                else setPopup(true)
-            })
-            .catch(error => {
-                if(error.message == 'Network Error'){
-                    setPopup(true);
-                }
-                console.log(error)
-            })
-    },[])
+        fetchData('https://api.scryfall.com/cards/search?q=t%3Atoken&unique=cards').then(response => {
+            if(response.length === 0) toast.error("API currently not responding :(")
+            setCards(response)
+        })
+        /**
+         * This is the original code for the use of the Token Buddy Backend.
+         * However, we have switched over to the Scryfall API for an indeterminate amount of time.
+         */
+        // client.get("/cards")
+        //     .then(response => {
+        //         if(response.status == 200) setCards(response.data.cards)
+        //         else setPopup(true)
+        //     })
+        //     .catch(error => {
+        //         if(error.message == 'Network Error'){
+        //             setPopup(true);
+        //         }
+        //         console.log(error)
+        //     })
+    },[1])
     function handleSubmit(e:FormEvent){
         e.preventDefault();
         const form = e.target;
@@ -67,7 +77,7 @@ export default function CardForm(props:Props){
         }
         props.dropDown(false)        
     }
-    if(cards.length !== 0) setPopup(false)
+    // if(cards.length !== 0) setPopup(false)
     return(
         (cards.length === 0) ? 
         <p>Loading...</p> 
