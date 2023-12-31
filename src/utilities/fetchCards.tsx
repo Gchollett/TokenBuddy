@@ -1,5 +1,6 @@
 import useClient from "@/hooks/use-client"
 import { card } from "./types";
+
 /**
  * @param page - Scryfall api string
  * @returns - list of all cards in the database with the given page parameters
@@ -42,10 +43,9 @@ const fetchData = async (page : string) => {
                 image: card.image_uris?.border_crop
             }
         })
-        //@ts-ignore
-        if(res.has_more){
-            //@ts-ignore
-            return cards.concat(fetchData(res.next_page));
+        if(res.data.has_more){
+            const next = await fetchData(res.data.next_page)
+            cards = cards.concat(next);
         }
     })
     .catch(()=> console.log("Network Error"))

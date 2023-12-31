@@ -41,6 +41,28 @@ export default function Card(props:Props){
             setEditStatus(false)
         }
     }
+    const handleCardFlip = (event : any) => { //reverses the faces
+        var number = event.altKey? props.card.number : 1;
+        if(props.card.face_number == 0) {
+            const existingCard = battlefield.find((card) => card.tapped === props.card.tapped && card.id == props.card.id && card.face_number === 1)
+            props.card.number -= number;
+            if(existingCard === undefined){
+                battlefield.splice(props.i,0,{...props.card,face_number:1,number:number})
+            }else{
+                existingCard.number += number;
+            }
+        }else{
+            const existingCard = battlefield.find((card) => card.tapped === props.card.tapped && card.id == props.card.id && card.face_number === 0)
+            props.card.number -= number;
+            if(existingCard === undefined){
+                battlefield.splice(props.i,0,{...props.card,face_number:0,number:number})
+            }else{
+                existingCard.number += number;
+            }
+        }
+        battlefieldGenerator(updater,battlefield)
+    }
+
     return(
     <div key={props.i+'d'} className="it w-1/4 h-fit max-h-min">
         {!editing?
@@ -98,27 +120,8 @@ export default function Card(props:Props){
                 }
                 battlefieldGenerator(updater,battlefield)
             }}
-            onAuxClick={(event) => { //reverses the faces
-                var number = event.altKey? props.card.number : 1;
-                if(props.card.face_number == 0) {
-                    const existingCard = battlefield.find((card) => card.tapped === props.card.tapped && card.id == props.card.id && card.face_number === 1)
-                    props.card.number -= number;
-                    if(existingCard === undefined){
-                        battlefield.splice(props.i,0,{...props.card,face_number:1,number:number})
-                    }else{
-                        existingCard.number += number;
-                    }
-                }else{
-                    const existingCard = battlefield.find((card) => card.tapped === props.card.tapped && card.id == props.card.id && card.face_number === 0)
-                    props.card.number -= number;
-                    if(existingCard === undefined){
-                        battlefield.splice(props.i,0,{...props.card,face_number:0,number:number})
-                    }else{
-                        existingCard.number += number;
-                    }
-                }
-                battlefieldGenerator(updater,battlefield)
-            }}
+            onTouchMove={handleCardFlip}
+            onAuxClick={handleCardFlip}
             className={`${imageClass} ${props.card.tapped ? 'rotate-90':'rotate-0'}`} src={props.card.multiFaced ? props.card.faces[props.card.face_number].image : props.card.face_number===0 ?props.card.image : "https://assets.moxfield.net/assets/images/missing-image.png"}/>
             <p className="text-center">{
                 props.card.multiFaced?
