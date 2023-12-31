@@ -13,9 +13,15 @@ type Props = {
 }
 
 const styles : StylesConfig = {
-    control: (styles,state) => ({...styles, border:'none', minWidth: '250px', width: 'fit', backgroundColor: 'black'}),
-    option: (styles) => ({
-        ...styles,
+    container: (styles) => ({...styles}),
+    input: (styles) => ({...styles,color:'inherit'}),
+    control: (styles) => ({...styles, boxShadow:'none', border:'none', minWidth: '250px', width: 'fit', backgroundColor: "inherit"}),
+    menu: (styles) => ({...styles, border:'solid', borderWidth:'1px'}),
+    menuList: (styles) => ({...styles}),
+    option: (styles,state) => ({
+        textAlign: "center",
+        paddingTop: '5px',
+        color: state.isFocused?'rgb(134 239 172)':'inherit',
     })
 }
 /**
@@ -82,25 +88,16 @@ export default function CardForm(props:Props){
         (cards.length === 0) ? 
         <p>Loading...</p> 
         :
-        <form onSubmit={handleSubmit} id="cardForm" className="flex cardForm">
+        <form onSubmit={handleSubmit} id="cardForm" className="flex bg-inherit">
             <Select
+                className="select-container"
+                classNamePrefix='select'
                 placeholder='Scry a Token'
                 required
                 autoFocus
                 name="chosenCard"
                 isSearchable
                 styles={styles}
-                theme= {(theme) => ({
-                    ...theme,
-                    colors:{
-                        ...theme.colors,
-                        primary25: 'green',
-                        primary: 'grey',
-                        neutral0: 'black',
-                        primary50: 'lightgreen',
-                        neutral80: 'white'
-                    }
-                })}
                 options={
                     cards.map((card) => {
                         return {

@@ -47,9 +47,9 @@ export default function SideBar(){
         })
     })
     return(
-        <div id="sidebar" className='absolute right-0 h-full rounded-l-md bg-neutral-900 side-bar closed'>
+        <div id="sidebar" className='absolute right-0 h-full rounded-l-md side-bar closed bg-zinc-300 dark:bg-neutral-900'>
             <button 
-                className='absolute right-[250px] bg-neutral-900 rounded-l-md hover:text-green-300'
+                className='absolute right-[250px] bg-inherit rounded-l-md hover:text-green-500 dark:hover:text-green-300'
                 onClick={()=>{
                     document.getElementById("sidebar")?.classList.toggle("closed")
                     setOpen(!open)
