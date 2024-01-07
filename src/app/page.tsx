@@ -6,11 +6,13 @@ import SideBar from '@/components/sidebar';
 import { BattlefieldContext, BattlefieldUpdaterContext } from '@/hooks/useBattlefield';
 // import { PopupContext } from '@/hooks/usePopup';
 import {battlefield} from '@/utilities/types';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
+  const start : battlefield = []
+  const [battlefield,setBattlefield] = useState(start);
   // const [popup,setPopup] = useState(false);
   const [dark, setDark] = useState(-1)
   useEffect(()=>{
@@ -26,12 +28,10 @@ export default function Home() {
     setDark((window.matchMedia('(prefers-color-scheme: dark)')).matches?1:0);
     if(dark >= 0) toast.info("Now using the Scryfall API!")
   },[dark])
-  const start : battlefield = []
-  const [battlefield,setBattlefield] = useState(start);
   return (
     // <PopupContext.Provider value={setPopup}>
     <BattlefieldUpdaterContext.Provider value = {setBattlefield}>
-    <BattlefieldContext.Provider value={battlefield}>
+    <BattlefieldContext.Provider value = {battlefield}>
       <main className="content-center min-h-screen px-1">
         <h1 className="absolute text-3xl left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">Token Buddy</h1>
         <SideBar/>

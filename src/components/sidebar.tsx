@@ -49,7 +49,7 @@ export default function SideBar(){
     return(
         <div id="sidebar" className='absolute right-0 h-full rounded-l-md side-bar closed bg-zinc-300 dark:bg-neutral-900'>
             <button 
-                className='absolute right-[250px] bg-inherit rounded-l-md hover:text-green-500 dark:hover:text-green-300'
+                className='absolute right-[250px] bg-inherit rounded-l-md hover:text-[--active-hex]'
                 onClick={()=>{
                     document.getElementById("sidebar")?.classList.toggle("closed")
                     setOpen(!open)
@@ -60,7 +60,7 @@ export default function SideBar(){
             <div className="grid max-h-full h-fit overflow-y-scroll pt-1">
                 <div className="grid h-fit pb-1 cursor-pointer" onClick={()=>{setMonarch(!monarch)}}>
                     <p className='justify-self-center pb-1'>{monarch?<CastleIcon/>:<CastleOutlinedIcon/>} Monarch</p>
-                    <img className="justify-self-center rounded-md w-[75%] top-10" src={monarch?"https://cards.scryfall.io/border_crop/front/0/c/0cd9c491-6ba0-4484-822c-73bcbe9b0c49.jpg?1689612352":""}/>
+                    <img alt="Monarch" className="justify-self-center rounded-md w-[75%] top-10" src={monarch?"https://cards.scryfall.io/border_crop/front/0/c/0cd9c491-6ba0-4484-822c-73bcbe9b0c49.jpg?1689612352":""}/>
                 </div>
                 <div className="grid h-fit w-full cursor-pointer pb-1" 
                     onClick={()=>{
@@ -79,7 +79,7 @@ export default function SideBar(){
                         }
                     }}>
                     <p className='justify-self-center pb-1'>{initiative?<CasinoIcon/>:<CasinoOutlinedIcon/>} Initiative</p>
-                    <img className='justify-self-center rounded-md w-[75%]' src={initiative?"https://cards.scryfall.io/border_crop/front/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1676232820g":""}/>
+                    <img alt="Initiative" className='justify-self-center rounded-md w-[75%]' src={initiative?"https://cards.scryfall.io/border_crop/front/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1676232820g":""}/>
                 </div>
                 <div className='grid w-full pb-1'>
                     <p onClick={()=>setDungeon(!dungeon)} onAuxClick={()=>{setEnteredDungeon(defaultDungeon);setDungeon(false)}} className='cursor-pointer justify-self-center pb-1'>{dungeon?<MeetingRoomIcon/>:<MeetingRoomoutlinedIcon/>}Dungeon {enteredDungeon.name!==undefined?"| " + enteredDungeon.room:""}</p>
@@ -113,7 +113,7 @@ export default function SideBar(){
                                 }}
                             >
                             {showDungeons?dungeons.map(el => <p key={el.name} className='text-center hover:text-green-300' onClick={()=>setEnteredDungeon(el)}>{el.name}</p>):<p className='self-center justify-self-center text-[35px]'>+</p>}
-                            </div>:<img className="justify-self-center rounded-md w-[75%] cursor-pointer" src={enteredDungeon.image} onClick={()=>setEnteredDungeon({...enteredDungeon,room:(enteredDungeon.room+1)})} onAuxClick={()=>setEnteredDungeon(defaultDungeon)}></img>
+                            </div>:<img alt={enteredDungeon.name} className="justify-self-center rounded-md w-[75%] cursor-pointer" src={enteredDungeon.image} onClick={()=>setEnteredDungeon({...enteredDungeon,room:(enteredDungeon.room+1)})} onAuxClick={()=>setEnteredDungeon(defaultDungeon)}></img>
                         ):<></>
                     }
                 </div>
@@ -128,7 +128,7 @@ export default function SideBar(){
                     }}
                 >
                     {!nightDay?<p className='justify-self-center'><WbSunnyOutlinedIcon/> Day/Night <DarkModeOutlinedIcon/></p>:<p className='justify-self-center'>{day?<WbSunnyIcon/>:<DarkModeIcon/>}{day?" Day":" Night"}</p>}
-                    <img className="w-[75%] rounded-md justify-self-center" src={!nightDay?"":(!day?"https://cards.scryfall.io/border_crop/back/9/c/9c0f7843-4cbb-4d0f-8887-ec823a9238da.jpg?1644880530":"https://cards.scryfall.io/border_crop/front/9/c/9c0f7843-4cbb-4d0f-8887-ec823a9238da.jpg?1644880530")}></img>
+                    <img alt={day?"day":"night"} className="w-[75%] rounded-md justify-self-center" src={!nightDay?"":(!day?"https://cards.scryfall.io/border_crop/back/9/c/9c0f7843-4cbb-4d0f-8887-ec823a9238da.jpg?1644880530":"https://cards.scryfall.io/border_crop/front/9/c/9c0f7843-4cbb-4d0f-8887-ec823a9238da.jpg?1644880530")}></img>
                 </div>
             </div>
         </div>

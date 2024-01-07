@@ -1,7 +1,7 @@
 'use client'
 
 import { BattlefieldContext } from "@/hooks/useBattlefield"
-import {useContext } from "react"
+import {useContext, useEffect } from "react"
 import Card from "./card"
 
 /**

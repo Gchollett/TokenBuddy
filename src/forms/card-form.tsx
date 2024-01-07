@@ -13,15 +13,14 @@ type Props = {
 }
 
 const styles : StylesConfig = {
-    container: (styles) => ({...styles}),
+    container: (styles) => ({...styles, backgroundColor:'inherit'}),
     input: (styles) => ({...styles,color:'inherit'}),
     control: (styles) => ({...styles, boxShadow:'none', border:'none', minWidth: '250px', width: 'fit', backgroundColor: "inherit"}),
-    menu: (styles) => ({...styles, border:'solid', borderWidth:'1px'}),
-    menuList: (styles) => ({...styles}),
-    option: (styles,state) => ({
+    menu: (styles) => ({...styles,backgroundColor:'inherit'}),
+    option: (styles, state) => ({
         textAlign: "center",
         paddingTop: '5px',
-        color: state.isFocused?'rgb(134 239 172)':'inherit',
+        color: state.isFocused?'var(--active-hex)':'inherit',
     })
 }
 /**
@@ -55,7 +54,7 @@ export default function CardForm(props:Props){
         //         }
         //         console.log(error)
         //     })
-    },[1])
+    },[])
     function handleSubmit(e:FormEvent){
         e.preventDefault();
         const form = e.target;
