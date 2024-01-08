@@ -37,6 +37,7 @@ body, main {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  overflow: hidden !important;
 }
 
 input::-webkit-outer-spin-button,
