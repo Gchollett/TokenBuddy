@@ -48,22 +48,28 @@ button {
   cursor: pointer;
 }
 
-.side-bar {
+.sidebar {
   width: 250px;
   z-index: 1;
   transition: 0.5s;
 }
 
-.side-bar button {
-  background-color: inherit;
+.sidebar-container button {
   top: calc(50% - 12px);
+  right: 250px;
+  transition: 0.5s;
 }
 
-.side-bar.closed{
+.sidebar-container.closed button{
+  right: 0;
+}
+
+.sidebar-container.closed .sidebar{
   right: -250px;
+  visibility: hidden;
 }
 
-.select-container{
+.select{
   background-color: inherit;
 }
 
