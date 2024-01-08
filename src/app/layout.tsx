@@ -15,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en" className='w-full overflow-x-hidden'>
       <body suppressHydrationWarning={true} className='w-full overflow-x-hidden'>
-        {children}
+        <div className='w-full overflow-x-hidden'> {/* This div is a wrapper to prevent vertical overflow on IOS devices */}
+          {children}
+        </div>
       </body>
     </html>
   )
