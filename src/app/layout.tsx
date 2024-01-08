@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Token Buddy',
   description: 'An token manager for Magic the Gathering',
-  viewport: {width: "device-width", initialScale: 1, minimumScale:1},
+  viewport: {width: "device-width", initialScale: 1, minimumScale:1, maximumScale:1},
 }
 
 export default function RootLayout({
