@@ -39,14 +39,16 @@ body, main {
     rgb(var(--background-start-rgb));
 }
 
-button {
-  margin-left: 10px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.cardNumber {
-  min-width: 10px;
-  cursor: pointer;
-}
+/* Firefox */
+/* input[type=number] {
+  -moz-appearance: textfield;
+} */
 
 .sidebar {
   width: 250px;

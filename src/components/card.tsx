@@ -121,13 +121,14 @@ export default function Card(props:Props){
             <p 
                 key={props.i+'p'} 
                 id={props.card.number.toString()} 
-                className="ml-4 bg-gray-300 text-black rounded px-1 w-fit cardNumber"
+                className="ml-4 bg-gray-300 text-black rounded px-1 w-fit min-w-[10px] cursor-pointer"
                 onClick={()=>{setEditStatus(true)}}>
                 {props.card.number}
             </p>
         :
             <input 
                 id="card-number"
+                type="number"
                 ref={cardNumberRef}
                 autoFocus
                 placeholder={props.card.number.toString()}

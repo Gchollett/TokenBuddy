@@ -106,7 +106,7 @@ export default function CardForm(props:Props){
                     })
                 }
             />
-            <button type="submit" className="ml-3">+</button>
+            <button type="submit" className="ml-[10px]">+</button>
         </form>
     )
 }
