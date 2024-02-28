@@ -30,8 +30,6 @@ const styles : StylesConfig = {
 export default function CardForm(props:Props){
     const battlefield = useContext(BattlefieldContext)
     const updater = useContext(BattlefieldUpdaterContext)
-    // const setPopup = useContext(PopupContext)
-    // const client = useClient();
     const start : battlefield = []
     const [cards, setCards] = useState(start);
     useEffect(() => {
