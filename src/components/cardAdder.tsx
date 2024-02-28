@@ -23,10 +23,12 @@ export default function CardAdder(){
         })
       })
     return(
-        <div ref={formRef} onClick={()=>{
-                setDropDown(true);
-            }} className={`grid text-2xl h-12 ${!dropDown ? 'hover:text-[--active-hex] hover:border-[--active-hex] cursor-pointer' : 'cursor-default'} transition-color w-full p-1 justify-center content-center border dark:border-gray-300 border-neutral-900 rounded bg-inherit`}>
+        <button tabIndex={1} ref={formRef} 
+            onClick={()=>{
+            	setDropDown(true);
+            }}
+            className={`grid text-2xl h-12 ${!dropDown ? 'hover:text-[--active-hex] hover:border-[--active-hex] cursor-pointer' : 'cursor-default'} transition-color w-full p-1 justify-center content-center border dark:border-gray-300 border-neutral-900 rounded bg-inherit`}>
             {dropDown ? <CardForm dropDown={setDropDown}/> : <p className="text-inherit">+</p>}
-        </div>
+        </button>
     )
 }
