@@ -11,7 +11,7 @@ const fetchData = async (page : string) => {
     await client.get(page).then(async res => {
         // console.log(res.data.data)
         cards = res.data.data.map((card : any)=>{
-          if(card.card_faces){
+          if(card.card_faces && card.card_faces[0].image_uris !== undefined){
             const front = card.card_faces[0]
             const back = card.card_faces[1]
             return {

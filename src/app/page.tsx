@@ -2,11 +2,12 @@
 
 import Battlefield from '@/components/battlefield'
 import CardAdder from '@/components/cardAdder'
+import DeleteButton from '@/components/deleteButton';
 import SideBar from '@/components/sidebar';
 import { BattlefieldContext, BattlefieldUpdaterContext } from '@/hooks/useBattlefield';
 // import { PopupContext } from '@/hooks/usePopup';
 import {battlefield} from '@/utilities/types';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -42,6 +43,7 @@ export default function Home() {
           <Battlefield/>
           {/* {popup? <div className='mt-5 mx-auto text-center bg-white text-black rounded opacity-75 '><p>Sorry but our backend server is temporarily down :( We don&#39;t know when it will be back up. If you would like to use our service, go to my <a className='underline text-red-600' href={"https://github.com/Gchollett/TokenBuddyBackend"} target="_blank">github</a> and copy the repository for the backend we use to host it locally :)</p></div> : <></>} */}
         </div>
+        <DeleteButton/>
         <div>
           <ToastContainer
             pauseOnHover={false}
