@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import Thumbnail from 'public/thumbnail.png'
+import Thumbnail from '../public/thumbnail.png'
 
 export const metadata: Metadata = {
   title: 'Token Buddy',
