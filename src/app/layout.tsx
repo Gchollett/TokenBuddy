@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Token Buddy',
     description: 'A token manager for Magic the Gathering',
     url: 'https://tokenbuddy.netlify.app',
-    images: [process.env.PUBLI_URL + '/thumbnail.png'],
+    images: ['https://tokenbuddy.netlify.app/thumbnail.png'],
     type: 'website',
   }
 }
