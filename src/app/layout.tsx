@@ -1,6 +1,5 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import Thumbnail from '../resources/thumbnail.png'
 
 export const metadata: Metadata = {
   title: 'Token Buddy',
@@ -10,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Token Buddy',
     description: 'A token manager for Magic the Gathering',
     url: 'https://tokenbuddy.netlify.app',
-    images: [Thumbnail.src],
+    images: ['%PUBLIC_URL%/thumbnail.png'],
     type: 'website',
   }
 }
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" className='w-full overflow-x-hidden'>
       <body suppressHydrationWarning={true} className='w-full overflow-x-hidden'>
-        <img src={Thumbnail.src}></img>
         <div className='relative w-full overflow-x-hidden'> {/* This div is a wrapper to prevent vertical overflow on IOS devices */}
           {children}
         </div>
