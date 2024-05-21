@@ -3,8 +3,15 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Token Buddy',
-  description: 'An token manager for Magic the Gathering',
+  description: 'A token manager for Magic the Gathering',
   viewport: {width: "device-width", initialScale: 1, minimumScale: 1, maximumScale: 1},
+  openGraph: {
+    title: 'Token Buddy',
+    description: 'A token manager for Magic the Gathering',
+    url: 'https://tokenbuddy.netlify.app',
+    images: ['../public/thumbnail.png'],
+    type: 'website',
+  }
 }
 
 export default function RootLayout({
