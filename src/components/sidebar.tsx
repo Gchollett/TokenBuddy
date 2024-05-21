@@ -10,7 +10,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import CasinoIcon from '@mui/icons-material/Casino';
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined';
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
 import useClient from '@/hooks/use-client';
 
 type dungeon = {
@@ -47,7 +47,7 @@ export default function SideBar(){
         })
     })
     return(
-        <div id="sidebar" className='h-full closed sidebar-container'>
+        <div id="sidebar" className='h-screen closed sidebar-container'>
             {/*Button for the pop out*/}
             <button className='absolute z-[99] rounded-l-md bg-zinc-300 dark:bg-neutral-900 hover:text-[--active-hex]'
                 onClick={()=>{
@@ -75,7 +75,7 @@ export default function SideBar(){
                                     if(enteredDungeon.name===undefined){
                                         setEnteredDungeon({
                                             name: "Undercity",
-                                            image: "https://cards.scryfall.io/border_crop/back/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1676232820",
+                                            image: "https://cards.scryfall.io/border_crop/front/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1707897435",
                                             room: 1
                                         })
                                         setDungeon(true)
@@ -85,7 +85,7 @@ export default function SideBar(){
                                 }
                             }}>
                             <p className='justify-self-center pb-1'>{initiative?<CasinoIcon/>:<CasinoOutlinedIcon/>} Initiative</p>
-                            {initiative?<img alt="Initiative" className='justify-self-center rounded-md w-[75%]' src={"https://cards.scryfall.io/border_crop/front/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1676232820g"}/>:<></>}
+                            {initiative?<img alt="Initiative" className='justify-self-center rounded-md w-[75%]' src={"https://cards.scryfall.io/border_crop/back/2/c/2c65185b-6cf0-451d-985e-56aa45d9a57d.jpg?1707897435"}/>:<></>}
                         </div>
                         {/*Dungeon*/}
                         <div className='grid w-full pb-1'>
@@ -98,13 +98,12 @@ export default function SideBar(){
                                                 client.get("https://api.scryfall.com/cards/search?q=t%3Adungeon")
                                                     .then(response =>{
                                                         if(response.status == 200){
-                                                            console.log(response.data.data)
                                                             var element;
                                                             var list = [];
                                                             for(var i in response.data.data){
                                                                 element = response.data.data[i]
                                                                 if(element.card_faces){
-                                                                    element = element.card_faces[1]
+                                                                    element = element.card_faces[0]
                                                                 }
                                                                 list.push({
                                                                     name: element.name,
