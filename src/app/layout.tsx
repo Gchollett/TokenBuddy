@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import Thumbnail from 'public/thumbnail.png'
 
 export const metadata: Metadata = {
   title: 'Token Buddy',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Token Buddy',
     description: 'A token manager for Magic the Gathering',
     url: 'https://tokenbuddy.netlify.app',
-    images: ['../public/thumbnail.png'],
+    images: [Thumbnail.src],
     type: 'website',
   }
 }
