@@ -1,10 +1,9 @@
 'use client'
 // import useClient from "@/hooks/use-client";
 import {battlefield, card} from "@/utilities/types";
-import Select, { StylesConfig } from "react-select"
+import Select, { StylesConfig,components } from "react-select"
 import {Dispatch, FormEvent, SetStateAction, useContext, useEffect, useState } from "react";
 import { BattlefieldContext, BattlefieldUpdaterContext } from "@/hooks/useBattlefield";
-import { PopupContext } from "@/hooks/usePopup";
 import fetchData from "@/utilities/fetchCards";
 import { toast } from "react-toastify";
 
@@ -15,12 +14,13 @@ type Props = {
 const styles : StylesConfig = {
     container: (styles) => ({...styles, backgroundColor:'inherit'}),
     input: (styles) => ({...styles,color:'inherit'}),
-    control: (styles) => ({...styles, boxShadow:'none', border:'none', minWidth: '250px', width: 'fit', backgroundColor: "inherit"}),
+    control: (styles,state) => ({...styles,cursor: state.isFocused?'':'pointer', boxShadow:'none', border:'none', minWidth: '250px', width: 'fit', backgroundColor: "inherit"}),
     menu: (styles) => ({...styles,backgroundColor:'inherit'}),
     option: (styles, state) => ({
         textAlign: "center",
         paddingTop: '5px',
         color: state.isFocused?'var(--active-hex)':'inherit',
+        cursor: 'pointer'
     })
 }
 /**
@@ -90,6 +90,7 @@ export default function CardForm(props:Props){
                 className="select-container"
                 classNamePrefix='select'
                 placeholder='Scry a Token'
+                noOptionsMessage= {() => 'Failed to Find'}
                 required
                 autoFocus
                 name="chosenCard"
