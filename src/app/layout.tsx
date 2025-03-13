@@ -1,5 +1,11 @@
+'use client'
+import { useEffect, useState } from 'react'
 import './globals.css'
 import type { Metadata } from 'next'
+import fetchData from "@/utilities/fetchCards";
+import { toast } from "react-toastify";
+import { card } from '@/utilities/types';
+import { CardContext } from '@/hooks/use-cards';
 
 export const metadata: Metadata = {
   title: 'Token Buddy',
@@ -19,11 +25,36 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const start: card[] = []
+  const [cards,setCards] = useState(start)
+  useEffect(() => {
+          fetchData('https://api.scryfall.com/cards/search?q=t%3Atoken&unique=cards').then(response => {
+              if(response.length === 0) toast.error("API currently not responding :(")
+              setCards(response)
+          })
+          /**
+           * This is the original code for the use of the Token Buddy Backend.
+           * However, we have switched over to the Scryfall API for an indeterminate amount of time.
+           */
+          // client.get("/cards")
+          //     .then(response => {
+          //         if(response.status == 200) setCards(response.data.cards)
+          //         else setPopup(true)
+          //     })
+          //     .catch(error => {
+          //         if(error.message == 'Network Error'){
+          //             setPopup(true);
+          //         }
+          //         console.log(error)
+          //     })
+      },[])
   return (
     <html lang="en" className='w-full overflow-x-hidden'>
       <body suppressHydrationWarning={true} className='w-full overflow-x-hidden'>
         <div className='relative w-full overflow-x-hidden'> {/* This div is a wrapper to prevent vertical overflow on IOS devices */}
-          {children}
+          <CardContext.Provider value={cards}>
+            {children}
+          </CardContext.Provider>
         </div>
       </body>
     </html>
