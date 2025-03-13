@@ -32,21 +32,6 @@ export default function RootLayout({
               if(response.length === 0) toast.error("API currently not responding :(")
               setCards(response)
           })
-          /**
-           * This is the original code for the use of the Token Buddy Backend.
-           * However, we have switched over to the Scryfall API for an indeterminate amount of time.
-           */
-          // client.get("/cards")
-          //     .then(response => {
-          //         if(response.status == 200) setCards(response.data.cards)
-          //         else setPopup(true)
-          //     })
-          //     .catch(error => {
-          //         if(error.message == 'Network Error'){
-          //             setPopup(true);
-          //         }
-          //         console.log(error)
-          //     })
       },[])
   return (
     <html lang="en" className='w-full overflow-x-hidden'>

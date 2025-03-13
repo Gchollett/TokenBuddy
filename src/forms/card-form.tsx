@@ -1,8 +1,6 @@
-'use client'
-// import useClient from "@/hooks/use-client";
-import {battlefield, card} from "@/utilities/types";
+import { card } from "@/utilities/types";
 import Select, { StylesConfig } from "react-select"
-import {Dispatch, FormEvent, SetStateAction, useContext, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useContext } from "react";
 import { BattlefieldContext, BattlefieldUpdaterContext } from "@/hooks/useBattlefield";
 import { CardContext } from "@/hooks/use-cards";
 
@@ -58,7 +56,6 @@ export default function CardForm(props:Props){
         }
         props.dropDown(false)        
     }
-    // if(cards.length !== 0) setPopup(false)
     return(
         (cards.length === 0) ? 
         <p>Loading...</p> 
