@@ -10,6 +10,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import CasinoIcon from '@mui/icons-material/Casino';
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined';
+import SpeedIcon from '@mui/icons-material/Speed';
 import { useEffect, useRef, useState } from 'react';
 import useClient from '@/hooks/use-client';
 
@@ -30,6 +31,7 @@ export default function SideBar(){
     const defaulDungeons : dungeon[] = []
     const [dungeons,setDungeons] = useState(defaulDungeons)
     const [showDungeons,setShowDungeons] = useState(false)
+    const [speed,setSpeed] = useState(0)
     //@ts-ignore
     const defaultDungeon : dungeon = {name:undefined,image:undefined,room:0}
     const [enteredDungeon,setEnteredDungeon] = useState(defaultDungeon)
@@ -124,7 +126,7 @@ export default function SideBar(){
                             }
                         </div>
                         {/*Night/Day*/}
-                        <div className='grid w-full cursor-pointer pb-10' 
+                        <div className='grid w-full cursor-pointer pb-1' 
                             onClick={()=>{
                                 if(nightDay) setDay(!day)
                                 else setNightDay(true)
@@ -136,6 +138,18 @@ export default function SideBar(){
                         >
                             {!nightDay?<p className='justify-self-center'><WbSunnyOutlinedIcon/> Day/Night <DarkModeOutlinedIcon/></p>:<p className='justify-self-center'>{day?<WbSunnyIcon/>:<DarkModeIcon/>}{day?" Day":" Night"}</p>}
                             {!nightDay?<></>:<img alt={day?"day":"night"} className="w-[75%] rounded-md justify-self-center" src={(!day?"https://cards.scryfall.io/border_crop/back/9/c/9c0f7843-4cbb-4d0f-8887-ec823a9238da.jpg?1644880530":"https://cards.scryfall.io/border_crop/front/9/c/9c0f7843-4cbb-4d0f-8887-ec823a9238da.jpg?1644880530")}/>}
+                        </div>
+                        {/*Speed*/}
+                        <div className='grid w-full cursor-pointer pb-10' 
+                            onClick={()=>{
+                                setSpeed(Math.min(speed+1,4));
+                            }}
+                            onAuxClick={()=>{
+                                setSpeed(Math.max(speed-1,0))
+                            }}
+                        >
+                            <p className='justify-self-center'><SpeedIcon/> Speed{speed == 0?"":` ${speed}`}</p>
+                            {speed==0?<></>:<img alt="speed" className="w-[75%] rounded-md justify-self-center" src={speed<4?"https://cards.scryfall.io/border_crop/front/8/2/82613de6-ed37-48c1-8d2f-d91a3f496794.jpg?1739184127":"https://cards.scryfall.io/border_crop/back/8/2/82613de6-ed37-48c1-8d2f-d91a3f496794.jpg?1739184127"}/>}
                         </div>
                     </div>
                 </div>
